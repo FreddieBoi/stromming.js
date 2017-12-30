@@ -1,9 +1,11 @@
 ﻿import * as jQuery from "jquery";
 
-export function getJson(url: string): JQueryXHR {
+export var corsProxyUrl = "https://cors.io/?";
+
+export function getJson(url: string, useCorsProxy = false): JQueryXHR {
     return jQuery.ajax({
         method: "get",
-        url: url,
+        url: useCorsProxy ? `${corsProxyUrl}${url}` : url,
         async: false
     });
 }

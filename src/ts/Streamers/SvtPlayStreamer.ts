@@ -17,7 +17,7 @@ export class SvtPlayStreamer implements IStreamer {
         let param = toParam({
             "q": term
         });
-        getJson(`${SvtPlayStreamer.url}?${param}`)
+        getJson(`${SvtPlayStreamer.url}?${param}`, true)
             .done((data: any) => {
                 this.count = data && data["totalResults"] ? data["totalResults"] : 0;
             })
