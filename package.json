@@ -1,0 +1,39 @@
+{
+  "name": "stromming",
+  "version": "0.0.1",
+  "description": "A simple application to use when you want to find what streaming services have the content you want to watch.",
+  "main": "stromming.js",
+  "dependencies": {
+    "@types/bootstrap": "^3.3.36",
+    "@types/jquery": "^3.2.17"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.4.1",
+    "source-map-loader": "^0.2.3",
+    "typescript": "^2.6.2"
+  },
+  "scripts": {
+    "dev-build": "webpack -d --display-modules --progress && node-sass src/scss/stromming.scss dist/stromming.css",
+    "dist-build": "webpack -p --display-modules --progress && node-sass src/scss/stromming.scss dist/stromming.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "streaming"
+  ],
+  "author": "Freddie <freddieboi@gmail.com>",
+  "contributors": [
+    {
+      "name": "Freddie",
+      "email": "freddieboi@gmail.com"
+    }
+  ],
+  "license": "Beerware",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FreddieBoi/stromming.js"
+  },
+  "bugs": {
+    "url": "https://github.com/FreddieBoi/stromming.js/issues"
+  }
+}

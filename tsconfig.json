@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "removeComments": true,
+        "strictNullChecks": true,
+        "module": "commonjs",
+        "target": "esnext"
+    },
+    "lib": [
+        "es2016.iterable"
+    ],
+    "include": [
+        "./src/ts/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
