@@ -10,6 +10,8 @@ export class ViaplayStreamer implements IStreamer {
 
     public readonly name = "Viaplay";
 
+    public readonly href = "https://viaplay.se/";
+
     public count = 0;
 
     public search(term: string) {

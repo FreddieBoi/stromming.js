@@ -6,7 +6,8 @@
         "removeComments": true,
         "strictNullChecks": true,
         "module": "commonjs",
-        "target": "esnext"
+        "target": "esnext",
+        "jsx": "react"
     },
     "lib": [
         "es2016.iterable"

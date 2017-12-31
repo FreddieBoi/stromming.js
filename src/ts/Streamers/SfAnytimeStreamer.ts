@@ -10,6 +10,8 @@ export class SfAnytimeStreamer implements IStreamer {
 
     public readonly name = "SF Anytime";
 
+    public readonly href = "https://www.sfanytime.com/sv";
+
     public count = 0;
 
     public search(term: string) {

@@ -10,6 +10,8 @@ export class SvtPlayStreamer implements IStreamer {
 
     public readonly name = "SVT Play";
 
+    public readonly href = "https://www.svtplay.se/";
+
     public count = 0;
 
     public search(term: string) {

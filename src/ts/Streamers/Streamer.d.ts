@@ -2,7 +2,9 @@
 
     readonly name: string;
 
-    readonly count: number;
+    readonly href: string;
+
+    count: number;
 
     search(term: string): void;
 
