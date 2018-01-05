@@ -9,7 +9,7 @@ export class ResultHeadingComponent extends React.Component<IResultHeadingProps,
 
     public render(): React.ReactNode {
         return (
-            <div>
+            <p>
                 {this.props.count
                     ? <span>
                         Found <strong>{this.props.count}</strong> content
@@ -17,9 +17,9 @@ export class ResultHeadingComponent extends React.Component<IResultHeadingProps,
                     </span>
                     : <span>
                         No content match for <strong>{this.props.term}</strong> :(
-                            </span>
+                    </span>
                 }
-            </div>
+            </p>
         );
     }
 

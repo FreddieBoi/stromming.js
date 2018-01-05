@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IResultProps } from "./Result";
-import { ResultListComponent as ResultList } from "./ResultList";
 import { ResultHeadingComponent as ResultHeading } from "./ResultHeading";
+import { ResultListComponent as ResultList } from "./ResultList";
 
 export interface IResultSectionProps {
     term: string;
@@ -11,10 +11,10 @@ export interface IResultSectionProps {
 export class ResultSectionComponent extends React.Component<IResultSectionProps, any> {
 
     public render(): React.ReactNode {
-        const count: number = this.props.results
+        const count = this.props.results
             ? this.props.results
                 .map((result) => result ? result.count : 0)
-                .reduce((total, current) => total + current)
+                .reduce((total, current) => total + current, 0)
             : 0;
         return (
             <section className="section-result">

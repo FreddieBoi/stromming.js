@@ -1,5 +1,5 @@
-﻿import { IStreamer } from "./Streamer";
-import { getJson, toParam } from "../Utils";
+﻿import { getJson, toParam } from "../Utils";
+import { IStreamer } from "./Streamer";
 
 /**
  * Sample URL; https://content.viaplay.se/pcdash-se/search?query=mysearchterm
@@ -16,17 +16,17 @@ export class ViaplayStreamer implements IStreamer {
 
     public search(term: string) {
         this.count = 0;
-        let param = toParam({
-            "query": term
+        const param = toParam({
+            query: term,
         });
         getJson(`${ViaplayStreamer.url}?${param}`)
-            .done((data: any) => {
-                this.count = data &&
-                    data["_embedded"] &&
-                    data["_embedded"]["viaplay:blocks"] &&
-                    data["_embedded"]["viaplay:blocks"][0] &&
-                    data["_embedded"]["viaplay:blocks"][0]["totalProductCount"]
-                    ? data["_embedded"]["viaplay:blocks"][0]["totalProductCount"]
+            .done((json: any) => {
+                this.count = json &&
+                    json._embedded &&
+                    json._embedded["viaplay:blocks"] &&
+                    json._embedded["viaplay:blocks"][0] &&
+                    json._embedded["viaplay:blocks"][0].totalProductCount
+                    ? json._embedded["viaplay:blocks"][0].totalProductCount
                     : 0;
             })
             .fail((jqXHR: JQueryXHR) => {

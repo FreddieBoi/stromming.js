@@ -1,9 +1,9 @@
 import * as React from "react";
-import { HeaderComponent as Header } from "./Header";
-import { SearchSectionComponent as SearchSection } from "./SearchSection";
-import { ResultSectionComponent as ResultSection } from "./ResultSection";
 import { FooterComponent as Footer } from "./Footer";
+import { HeaderComponent as Header } from "./Header";
 import { IResultProps } from "./Result";
+import { ResultSectionComponent as ResultSection } from "./ResultSection";
+import { SearchSectionComponent as SearchSection } from "./SearchSection";
 
 export interface IAppProps {
     onSearch: (term: string) => IResultProps[];
@@ -21,8 +21,8 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
 
         this.state = {
             term: "",
-            results: []
-        }
+            results: [],
+        };
     }
 
     public render(): React.ReactNode {
@@ -30,7 +30,7 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
             <div className="container-fluid">
                 <Header />
                 <SearchSection onSearch={this.handleSearch.bind(this)} />
-                {this.state.term && this.state.results && this.state.results.length > 0
+                {this.state.term
                     ? <ResultSection term={this.state.term} results={this.state.results} />
                     : null}
                 <Footer />
@@ -41,18 +41,18 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
     private handleSearch(term: string) {
         const results = this.props.onSearch(term)
             .filter((result) => {
-                // Only show results with matches
+                // only show results with matches
                 return result && result.count;
             })
             .sort((a, b) => {
-                // Show result with most matches first
+                // show result with most matches first
                 return a && b
                     ? b.count - a.count
                     : 0;
             });
         this.setState({
-            term: term,
-            results: results
+            term,
+            results,
         });
     }
 

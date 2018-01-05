@@ -1,5 +1,5 @@
-﻿import { IStreamer } from "./Streamers/Streamer";
-import * as jQuery from "jquery";
+﻿import * as jQuery from "jquery";
+import { IStreamer } from "./Streamers/Streamer";
 
 export interface ISearchResult {
     name: string;
@@ -14,7 +14,7 @@ export function search(term: string, streamers: IStreamer[]): ISearchResult[] {
     }
     console.info(`Searching for "${term}"...`);
     let count = 0;
-    for (let streamer of streamers) {
+    for (const streamer of streamers) {
         try {
             streamer.search(term);
             count += streamer.count;
@@ -28,14 +28,14 @@ export function search(term: string, streamers: IStreamer[]): ISearchResult[] {
     }
     console.info(`${count}! :D`);
     const results: ISearchResult[] = [];
-    for (let streamer of streamers) {
+    for (const streamer of streamers) {
         console.info(`${streamer.name}: ${streamer.count}`);
-        let result: ISearchResult = {
+        const result: ISearchResult = {
             name: streamer.name,
             href: streamer.href,
-            count: streamer.count
+            count: streamer.count,
         };
-        results.push(result)
+        results.push(result);
     }
     return results;
 }

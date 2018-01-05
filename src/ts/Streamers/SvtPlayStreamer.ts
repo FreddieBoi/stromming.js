@@ -16,12 +16,14 @@ export class SvtPlayStreamer implements IStreamer {
 
     public search(term: string) {
         this.count = 0;
-        let param = toParam({
-            "q": term
+        const param = toParam({
+            q: term,
         });
         getJson(`${SvtPlayStreamer.url}?${param}`, true)
-            .done((data: any) => {
-                this.count = data && data["totalResults"] ? data["totalResults"] : 0;
+            .done((json: any) => {
+                this.count = json && json.totalResults
+                    ? json.totalResults
+                    : 0;
             })
             .fail((jqXHR: JQueryXHR) => {
                 this.count = 0;
