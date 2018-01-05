@@ -15,8 +15,7 @@
     "typescript": "^2.6.2"
   },
   "scripts": {
-    "dev-build": "webpack -d --display-modules --progress && node-sass src/scss/stromming.scss dist/stromming.css",
-    "dist-build": "webpack -p --display-modules --progress && node-sass src/scss/stromming.scss dist/stromming.css",
+    "build": "webpack -d --display-modules --progress && node-sass src/scss/stromming.scss dist/stromming.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

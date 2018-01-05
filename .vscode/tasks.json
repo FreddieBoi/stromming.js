@@ -5,18 +5,12 @@
     "tasks": [
         {
             "type": "npm",
-            "script": "dev-build",
+            "script": "build",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-        },
-        {
-            "type": "npm",
-            "script": "dist-build",
-            "problemMatcher": [],
-            "group": "build"
         }
     ]
 }
