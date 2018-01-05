@@ -1,11 +1,11 @@
-﻿export interface IStreamer {
+﻿import { ISearchResult } from "../Search";
+
+export interface IStreamer {
 
     readonly name: string;
 
     readonly href: string;
 
-    count: number;
-
-    search(term: string): void;
+    search(term: string): Promise<ISearchResult>;
 
 }

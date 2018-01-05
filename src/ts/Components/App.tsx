@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ISearchResult } from "../Search";
 import { FooterComponent as Footer } from "./Footer";
 import { HeaderComponent as Header } from "./Header";
 import { IResultProps } from "./Result";
@@ -6,11 +7,12 @@ import { ResultSectionComponent as ResultSection } from "./ResultSection";
 import { SearchSectionComponent as SearchSection } from "./SearchSection";
 
 export interface IAppProps {
-    onSearch: (term: string) => IResultProps[];
+    onSearch: (term: string) => Promise<ISearchResult[]>;
 }
 
 export interface IAppState {
     term: string;
+    isSearching: boolean;
     results: IResultProps[];
 }
 
@@ -21,6 +23,7 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
 
         this.state = {
             term: "",
+            isSearching: false,
             results: [],
         };
     }
@@ -29,9 +32,12 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
         return (
             <div className="container-fluid">
                 <Header />
-                <SearchSection onSearch={this.handleSearch.bind(this)} />
+                <SearchSection onSearch={this.handleSearch.bind(this)}
+                    disabled={this.state.isSearching} />
                 {this.state.term
-                    ? <ResultSection term={this.state.term} results={this.state.results} />
+                    ? <ResultSection term={this.state.term}
+                        isSearching={this.state.isSearching}
+                        results={this.state.results} />
                     : null}
                 <Footer />
             </div>
@@ -39,20 +45,37 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
     }
 
     private handleSearch(term: string) {
-        const results = this.props.onSearch(term)
-            .filter((result) => {
-                // only show results with matches
-                return result && result.count;
-            })
-            .sort((a, b) => {
-                // show result with most matches first
-                return a && b
-                    ? b.count - a.count
-                    : 0;
-            });
+        this.props.onSearch(term)
+            .then((results) => this.handleSearchResults(results));
+
         this.setState({
             term,
-            results,
+            isSearching: true,
+            results: [],
+        });
+    }
+
+    private handleSearchResults(results: ISearchResult[]) {
+        if (!results) {
+            this.setState({
+                isSearching: false,
+                results: [],
+            });
+            return;
+        }
+        this.setState({
+            isSearching: false,
+            results: results
+                .filter((result) => {
+                    // Only show results with matches
+                    return result && result.count;
+                })
+                .sort((a, b) => {
+                    // Show result with most matches first
+                    return a && b
+                        ? b.count - a.count
+                        : 0;
+                }),
         });
     }
 

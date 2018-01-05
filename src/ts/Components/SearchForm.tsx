@@ -2,6 +2,7 @@ import * as React from "react";
 
 export interface ISearchFormProps {
     onSearch: (term: string) => void;
+    disabled: boolean;
 }
 
 export interface ISearchFormState {
@@ -26,9 +27,10 @@ export class SearchFormComponent extends React.Component<ISearchFormProps, ISear
                         className="form-control"
                         placeholder="Search content..."
                         value={this.state.term}
-                        onChange={this.handleChange.bind(this)} />
+                        onChange={this.handleChange.bind(this)}
+                        disabled={this.props.disabled} />
                 </div>
-                <button type="submit" className="btn btn-primary">Search</button>
+                <button type="submit" className="btn btn-primary" disabled={this.props.disabled}>Search</button>
             </form>
         );
     }

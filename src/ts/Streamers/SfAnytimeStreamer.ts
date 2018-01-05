@@ -1,4 +1,5 @@
-﻿import { postJson, toParam } from "./../Utils";
+﻿import { ISearchResult } from "../Search";
+import { postJson, toParam } from "../Utils";
 import { IStreamer } from "./Streamer";
 
 /**
@@ -12,25 +13,32 @@ export class SfAnytimeStreamer implements IStreamer {
 
     public readonly href = "https://www.sfanytime.com/sv";
 
-    public count = 0;
-
-    public search(term: string) {
-        this.count = 0;
+    public search(term: string): Promise<ISearchResult> {
         const param = toParam({
             query: term,
         });
         const data = `{"requests":[{"indexName":"prod_sfanytime_movies","params":"${param}&numericFilters=adult%3D0%2C%20available_in_se%3D1&hitsPerPage=60&maxValuesPerFacet=3&page=0&attributesToRetrieve=mediaid%2Cproducttype%2Cproducttypeid%2Ctitle%2Ctitle_sv%2Ctitle_no%2Ctitle_da%2Ctitle_fi%2Ccover_id%2Ccover_no%2Ccover_sv%2Ccover_da%2Ccover_fi&distinct=true&facets=%5B%5D&tagFilters="}]}`;
-        postJson(SfAnytimeStreamer.url, data)
-            .done((json: any) => {
-                this.count = json &&
+        return postJson(SfAnytimeStreamer.url, data)
+            .then((json: any) => {
+                const count = json &&
                     json.results &&
                     json.results[0] &&
                     json.results[0].nbHits
                     ? json.results[0].nbHits
                     : 0;
-            })
-            .fail((jqXHR: JQueryXHR) => {
-                this.count = 0;
+                return {
+                    name: this.name,
+                    href: this.href,
+                    count,
+                };
+            },
+            (reason: string) => {
+                return {
+                    name: this.name,
+                    href: this.href,
+                    count: 0,
+                    error: reason,
+                };
             });
     }
 

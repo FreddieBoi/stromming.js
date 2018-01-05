@@ -5,6 +5,7 @@ import { ResultListComponent as ResultList } from "./ResultList";
 
 export interface IResultSectionProps {
     term: string;
+    isSearching: boolean;
     results: IResultProps[];
 }
 
@@ -18,10 +19,15 @@ export class ResultSectionComponent extends React.Component<IResultSectionProps,
             : 0;
         return (
             <section className="section-result">
-                <ResultHeading term={this.props.term} count={count} />
-                {this.props.results && this.props.results.length > 0
-                    ? <ResultList results={this.props.results} />
-                    : null}
+                {this.props.isSearching ?
+                    <p>Searching for <strong>{this.props.term}</strong>...</p>
+                    : <div>
+                        <ResultHeading term={this.props.term} count={count} />
+                        {this.props.results && this.props.results.length > 0
+                            ? <ResultList results={this.props.results} />
+                            : null}
+                    </div>
+                }
             </section>
         );
     }

@@ -1,4 +1,5 @@
-﻿import { getJson, toParam } from "../Utils";
+﻿import { ISearchResult } from "../Search";
+import { getJson, toParam } from "../Utils";
 import { IStreamer } from "./Streamer";
 
 /**
@@ -12,25 +13,32 @@ export class ViaplayStreamer implements IStreamer {
 
     public readonly href = "https://viaplay.se/";
 
-    public count = 0;
-
-    public search(term: string) {
-        this.count = 0;
+    public search(term: string): Promise<ISearchResult> {
         const param = toParam({
             query: term,
         });
-        getJson(`${ViaplayStreamer.url}?${param}`)
-            .done((json: any) => {
-                this.count = json &&
+        return getJson(`${ViaplayStreamer.url}?${param}`)
+            .then((json: any) => {
+                const count = json &&
                     json._embedded &&
                     json._embedded["viaplay:blocks"] &&
                     json._embedded["viaplay:blocks"][0] &&
                     json._embedded["viaplay:blocks"][0].totalProductCount
                     ? json._embedded["viaplay:blocks"][0].totalProductCount
                     : 0;
-            })
-            .fail((jqXHR: JQueryXHR) => {
-                this.count = 0;
+                return {
+                    name: this.name,
+                    href: this.href,
+                    count,
+                };
+            },
+            (reason: any) => {
+                return {
+                    name: this.name,
+                    href: this.href,
+                    count: 0,
+                    error: reason,
+                };
             });
     }
 
