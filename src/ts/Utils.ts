@@ -22,9 +22,9 @@ export function postJson(url: string, data: string): Promise<any> {
     return new Promise((resolve, reject) => {
         return jQuery
             .ajax({
+                data,
                 method: "post",
                 url,
-                data,
             })
             .done((json) => {
                 resolve(json);

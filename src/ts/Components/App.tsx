@@ -11,9 +11,9 @@ export interface IAppProps {
 }
 
 export interface IAppState {
-    term: string;
     isSearching: boolean;
     results: IResultProps[];
+    term: string;
 }
 
 export class AppComponent extends React.Component<IAppProps, IAppState> {
@@ -22,9 +22,9 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
         super(props, context);
 
         this.state = {
-            term: "",
             isSearching: false,
             results: [],
+            term: "",
         };
     }
 
@@ -49,9 +49,9 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
             .then((results) => this.handleSearchResults(results));
 
         this.setState({
-            term,
             isSearching: true,
             results: [],
+            term,
         });
     }
 

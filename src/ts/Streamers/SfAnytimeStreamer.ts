@@ -27,17 +27,17 @@ export class SfAnytimeStreamer implements IStreamer {
                     ? json.results[0].nbHits
                     : 0;
                 return {
-                    name: this.name,
-                    href: this.href,
                     count,
+                    href: this.href,
+                    name: this.name,
                 };
             },
             (reason: string) => {
                 return {
-                    name: this.name,
-                    href: this.href,
                     count: 0,
                     error: reason,
+                    href: this.href,
+                    name: this.name,
                 };
             });
     }

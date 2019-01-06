@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ISearchFormProps, SearchFormComponent as SearchForm } from "./SearchForm";
+import { SearchFormComponent as SearchForm } from "./SearchForm";
 
 export interface ISearchSectionProps {
     onSearch: (term: string) => void;

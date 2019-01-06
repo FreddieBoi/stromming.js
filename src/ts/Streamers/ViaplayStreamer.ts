@@ -27,17 +27,17 @@ export class ViaplayStreamer implements IStreamer {
                     ? json._embedded["viaplay:blocks"][0].totalProductCount
                     : 0;
                 return {
-                    name: this.name,
-                    href: this.href,
                     count,
+                    href: this.href,
+                    name: this.name,
                 };
             },
             (reason: any) => {
                 return {
-                    name: this.name,
-                    href: this.href,
                     count: 0,
                     error: reason,
+                    href: this.href,
+                    name: this.name,
                 };
             });
     }
