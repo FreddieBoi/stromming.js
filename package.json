@@ -14,13 +14,14 @@
     "node-sass": "^4.11.0",
     "source-map-loader": "^0.2.3",
     "tslint": "^5.12.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^2.6.2",
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0"
   },
   "scripts": {
     "build": "webpack -d --display-modules --progress && node-sass src/scss/stromming.scss dist/stromming.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tslint --project tsconfig.json"
   },
   "keywords": [
     "streaming"

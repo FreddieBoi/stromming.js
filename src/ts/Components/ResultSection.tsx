@@ -22,9 +22,14 @@ export class ResultSectionComponent extends React.Component<IResultSectionProps,
                 {this.props.isSearching ?
                     <p>Searching for <strong>{this.props.term}</strong>...</p>
                     : <div>
-                        <ResultHeading term={this.props.term} count={count} />
+                        <ResultHeading
+                            term={this.props.term}
+                            count={count}
+                        />
                         {this.props.results && this.props.results.length > 0
-                            ? <ResultList results={this.props.results} />
+                            ? <ResultList
+                                results={this.props.results}
+                            />
                             : null}
                     </div>
                 }

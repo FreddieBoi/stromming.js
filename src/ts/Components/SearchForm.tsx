@@ -2,7 +2,7 @@ import * as React from "react";
 
 export interface ISearchFormProps {
     onSearch: (term: string) => void;
-    disabled: boolean;
+    isDisabled: boolean;
 }
 
 export interface ISearchFormState {
@@ -21,21 +21,23 @@ export class SearchFormComponent extends React.Component<ISearchFormProps, ISear
 
     public render(): React.ReactNode {
         return (
-            <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
-                <div className="form-group mr-2">
-                    <input type="text"
+            <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                    <input
+                        type="text"
                         className="form-control"
                         placeholder="Search content..."
                         value={this.state.term}
-                        onChange={this.handleChange.bind(this)}
-                        disabled={this.props.disabled} />
+                        onChange={this.handleChange}
+                        disabled={this.props.isDisabled}
+                    />
                 </div>
-                <button type="submit" className="btn btn-primary" disabled={this.props.disabled}>Search</button>
+                <button type="submit" className="btn btn-primary" disabled={this.props.isDisabled || !this.state.term}>Search</button>
             </form>
         );
     }
 
-    private handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    private handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         event.stopPropagation();
         this.props.onSearch(this.state.term);
@@ -44,7 +46,7 @@ export class SearchFormComponent extends React.Component<ISearchFormProps, ISear
         });
     }
 
-    private handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    private handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             term: event.target.value,
         });

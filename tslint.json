@@ -1,7 +1,11 @@
 {
-    "extends": "tslint:latest",
+    "extends": [
+        "tslint:latest",
+        "tslint-react"
+    ],
     "rules": {
         "max-line-length": false,
-        "no-implicit-dependencies": false
+        "no-implicit-dependencies": false,
+        "jsx-no-multiline-js": false
     }
 }

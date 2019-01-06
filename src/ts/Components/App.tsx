@@ -32,19 +32,23 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
         return (
             <div className="container-fluid">
                 <Header />
-                <SearchSection onSearch={this.handleSearch.bind(this)}
-                    disabled={this.state.isSearching} />
+                <SearchSection
+                    onSearch={this.handleSearch}
+                    isDisabled={this.state.isSearching}
+                />
                 {this.state.term
-                    ? <ResultSection term={this.state.term}
+                    ? <ResultSection
+                        term={this.state.term}
                         isSearching={this.state.isSearching}
-                        results={this.state.results} />
+                        results={this.state.results}
+                    />
                     : null}
                 <Footer />
             </div>
         );
     }
 
-    private handleSearch(term: string) {
+    private handleSearch = (term: string) => {
         this.props.onSearch(term)
             .then((results) => this.handleSearchResults(results));
 
@@ -55,7 +59,7 @@ export class AppComponent extends React.Component<IAppProps, IAppState> {
         });
     }
 
-    private handleSearchResults(results: ISearchResult[]) {
+    private handleSearchResults = (results: ISearchResult[]) => {
         if (!results) {
             this.setState({
                 isSearching: false,
